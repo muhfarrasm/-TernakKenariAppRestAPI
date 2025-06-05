@@ -19,9 +19,11 @@ class IndukRequestModel {
         this.gambarInduk,
     });
 
+    String toRawJson() => json.encode(toMap());
     factory IndukRequestModel.fromJson(String str) => IndukRequestModel.fromMap(json.decode(str));
 
-    String toJson() => json.encode(toMap());
+    Map<String, dynamic> toJson() => toMap();
+    // String toJson() => json.encode(toMap());
 
     factory IndukRequestModel.fromMap(Map<String, dynamic> json) => IndukRequestModel(
         adminId: json["admin_id"],
