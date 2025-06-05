@@ -33,4 +33,22 @@ class PofileBuyerRepository {
       return Left("An error occured while adding induk: $e");
     }
   }
+
+  Future<Either<String, BuyerProfileResponseModel>>getProfileBuyer() async{
+    try {
+      final response = await _serviceHttpClient.get("buyer/profile", {});
+      if (response.statusCode == 200){
+        final jsonResponse = json.decode(response.body);
+        final profileResponse = BuyerProfileResponseModel.fromJson(jsonResponse);
+        return Right(profileResponse);
+      }else{
+        final jsonResponse = json.decode(response.body);
+        return Left(jsonResponse['message'] ?? "Get Profile failed");
+      }
+    } catch (e){
+      return Left("An error occured while getting All Induk: $e");
+    }
+  }
+
+
 }
