@@ -19,9 +19,11 @@ class AnakRequestModel {
         this.ibuId,
     });
 
+    String toRawJson() => json.encode(toMap());
+    Map<String, dynamic> toJson() => toMap();
     factory AnakRequestModel.fromJson(String str) => AnakRequestModel.fromMap(json.decode(str));
 
-    String toJson() => json.encode(toMap());
+   // String toJson() => json.encode(toMap());
 
     factory AnakRequestModel.fromMap(Map<String, dynamic> json) => AnakRequestModel(
         noRing: json["no_ring"],
