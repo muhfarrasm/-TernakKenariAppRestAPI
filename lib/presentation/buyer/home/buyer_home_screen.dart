@@ -166,6 +166,41 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
                                   } 
                                 );
                               },
+                              child: Card(
+                                elevation: 4,
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.vertical(
+                                        top: Radius.circular(12),
+                                      ),
+                                      child: burung.image.isNotEmpty
+                                        ? Image.network(
+                                            burung.image,
+                                            height: 100,
+                                            width: double.infinity,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Container(
+                                            height: 100,
+                                            width: double.infinity,
+                                            color: Colors.grey[300],
+                                            child: const Icon(
+                                              Icons.image_not_supported,
+                                            ),
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              
+
+
                             );
                           },
                         );
