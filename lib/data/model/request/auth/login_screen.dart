@@ -13,6 +13,13 @@ class _LoginScreenState extends State<LoginScreen> {
   late final GlobalKey<FormState> _key;
   bool isShowPassword = false;
 
+  @override
+  void initState() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    _key = GlobalKey<FormState>();
+    super.initState();
+  }
   
   @override
   Widget build(BuildContext context) {
