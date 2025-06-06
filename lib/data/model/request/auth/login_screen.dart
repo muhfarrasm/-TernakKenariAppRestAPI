@@ -20,6 +20,15 @@ class _LoginScreenState extends State<LoginScreen> {
     _key = GlobalKey<FormState>();
     super.initState();
   }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    _key.currentState?.dispose();
+    super.dispose();
+  }
+
   
   @override
   Widget build(BuildContext context) {
