@@ -1,14 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:canary_app/data/model/request/buyer/buyer_profile_request_model.dart';
 import 'package:canary_app/data/model/response/buyer/buyer_profile_response_model.dart';
-import 'package:canary_app/data/repository/profile_buyer_repository';
+import 'package:canary_app/data/repository/profile_buyer_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'profile_buyer_event.dart';
 part 'profile_buyer_state.dart';
 
 class ProfileBuyerBloc extends Bloc<ProfileBuyerEvent, ProfileBuyerState> {
-  final ProfileBuyerRepository profileBuyerRepository;
+  final PofileBuyerRepository profileBuyerRepository;
   ProfileBuyerBloc({required this.profileBuyerRepository})
     : super(ProfileBuyerInitial()) {
     on<AddProfileBuyerEvent>(_addProfileBuyer);
