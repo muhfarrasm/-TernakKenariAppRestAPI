@@ -195,6 +195,44 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
                                             ),
                                           ),
                                     ),
+
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              burung.noRing,
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Jenis Kenari: ${burung.jenisKenari}",
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(
+                                              "Jenis Kelamin: ${burung.jenisKelamin}",
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(
+                                              "harga: ${burung.harga}",
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            const SizedBox(height: 4),
+                                            Text(
+                                              "Status: ${burung.status}",
+                                              style: TextStyle(
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.bold
+                                              ),
+                                              overflow: TextOverflow.ellipsis,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -204,7 +242,8 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
                             );
                           },
                         );
-                    };
+                    }
+                    return const SizedBox();
                   },
                 ),
               ),
