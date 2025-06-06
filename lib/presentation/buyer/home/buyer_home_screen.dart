@@ -1,5 +1,6 @@
 import 'package:canary_app/core/components/spaces.dart';
 import 'package:canary_app/data/model/request/auth/login_screen.dart';
+import 'package:canary_app/data/model/response/burung_semua_tersedia_model.dart';
 import 'package:canary_app/presentation/bloc/get_burung_tersedia_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -92,11 +93,93 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
                 },
               ),
             ),
+
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: BlocBuilder<GetBurungTersediaBloc, GetBurungTersediaState>(
+                  builder: (context, state) {
+                    if (state is GetBurungTersediaLoading) {
+                      return const Center (child: CircularProgressIndicator());
+                    }
+
+                    if (state is GetBurungTersediaError){
+                      return Center(
+                        child: Text("Terjadi kesalahan: ${state.message}"),
+                      );
+                    }
+
+                    if (state is GetBurungTersediaLoaded) {
+                      final List<DataBurungTersedia> burungList = 
+                        state.burungTersedia.data;
+
+                        if (burungList.isEmpty) {
+                          return const Center(
+                            child: Text("Tidak ada burung tersedia"),
+                          );
+                        }
+
+                        return GridView.builder(
+                          itemCount: burungList.length,
+                          gridDelegate: const 
+                            SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              childAspectRatio: 0.8,
+                            ),
+                          itemBuilder: (contect, index){
+                            final burung = burungList[index];
+
+                               return GestureDetector(
+                              onTap: () {
+                                //use ios dialog
+                                showDialog(
+                                  context: context, 
+                                  builder: (context) {
+                                    return CupertinoAlertDialog(
+                                      title: Text("Detail Burung"),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text("No Ring: ${burung.noRing}"),
+                                          Text("Usia: ${burung.usia}"),
+                                          Text("Jenis Kenatikan: ${burung.jenisKenari}"),
+                                          Text("Jenis Kelamin: ${burung.jenisKelamin}"),
+                                          Text("Harga: ${burung.harga}"),
+                                          // Tambahkan Informasi lain yang diperlukan
+                                          Text(
+                                            "Deskripsi: ${burung.deskripsi.isEmpty ? burung.deskripsi :'Tidak ada deskripsi'}",
+                                          ),
+                                        ],
+                                      ),
+                                      actions: [
+                                        CupertinoDialogAction(
+                                          child: const Text("Tutup"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  } 
+                                );
+                              },
+                            );
+                          },
+                        );
+                    };
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),
 
       
+
      );
   }
 }
